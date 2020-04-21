@@ -10,7 +10,7 @@ import java.net.Socket;
  */
 public class Server {
     public static void main(String[] args){
-        int port = 1501;
+        int port = 1234;
         ServerSocket serverSocket;
         Socket socket;
         System.out.println("Server started.");
