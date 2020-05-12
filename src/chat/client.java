@@ -37,7 +37,7 @@ public class client {
         try{
             String msgin="";
 
-            s = new Socket("127.0.0.1, 1201"); //ip = localhost
+            s = new Socket("127.0.0.1", 1201); //ip = localhost
             dis =new DataInputStream(s.getInputStream());
             dout = new DataOutputStream(s.getOutputStream());
 
