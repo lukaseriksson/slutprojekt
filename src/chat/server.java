@@ -16,7 +16,7 @@ public class server {
     static DataOutputStream dout;
 
     private JPanel server;
-    private JTextField msg_area;
+    private JTextArea msg_area;
     private JTextField msg_text;
     private JButton msg_send;
 
