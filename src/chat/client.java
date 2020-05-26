@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -35,12 +36,8 @@ public class client {
             }
         });
         try{
-            String msgin="";
 
-            s = new Socket("127.0.0.1", 1201); //ip = localhost
-            dis =new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-
+            String msgin="SetUpNetwork";
             while(msgin.equals("exit")){
                 msgin = dis.readUTF();
                 msg_area.setText(msg_area.getText()+"\n server");
@@ -50,6 +47,14 @@ public class client {
         {
             //handle
         }
+    }
+    private String SetUpNetwork() throws IOException {
+        String msgin="";
+        ss=new ServerSocket(1201);
+        s=ss.accept();
+        dis =new DataInputStream(s.getInputStream());
+        dout = new DataOutputStream(s.getOutputStream());
+        return msgin;
     }
 
     public static void main(String[] args) {
