@@ -35,6 +35,10 @@ public class client {
                 }
             }
         });
+        InputLoop();
+    }
+
+    private void InputLoop() {
         try{
 
             String msgin="SetUpNetwork";
@@ -48,6 +52,7 @@ public class client {
             //handle
         }
     }
+
     private String SetUpNetwork() throws IOException {
         String msgin="";
         ss=new ServerSocket(1201);

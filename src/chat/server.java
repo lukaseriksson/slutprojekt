@@ -37,6 +37,10 @@ public class server {
             }
         });
 
+        InputLoop();
+    }
+
+    private void InputLoop() {
         try{
             String msgin = "SetUpNetwork";
             while(msgin.equals("exit")){
