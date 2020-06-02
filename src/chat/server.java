@@ -42,7 +42,9 @@ public class server {
         try{
             String msgin = "SetUpNetwork";
             while(!msgin.equals("exit")){
+                System.out.println("väntar");
                 msgin = dis.readUTF();
+                System.out.println(msgin);
                 msg_area.setText(msg_area.getText() + " \n Server : " + msgin);
             }
 
@@ -69,8 +71,8 @@ public class server {
         frame.pack();
         frame.setVisible(true);
         try {
-            s.InputLoop();
             s.SetUpNetwork();
+            s.InputLoop();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -30,7 +30,7 @@ public class client {
                     msg_text.setText("");
                 }catch (Exception e)
                 {
-                    //handle
+                    System.out.println("nått blev fel");
                 }
             }
         });
@@ -38,10 +38,10 @@ public class client {
 
     private void InputLoop() {
         try{
-
-            String msgin="SetUpNetwork";
+            String msgin = "SetUpNetwork";
             while(!msgin.equals("exit")){
                 msgin = dis.readUTF();
+                System.out.println(msgin);
                 msg_area.setText(msg_area.getText() + "\n Client : " + msgin);
             }
 
@@ -52,11 +52,10 @@ public class client {
     }
 
     private String SetUpNetwork() throws IOException {
-        String msgin = "";
+        String msgin="";
         s = new Socket("127.0.0.1",1201);
         dis =new DataInputStream(s.getInputStream());
         dout = new DataOutputStream(s.getOutputStream());
-        dout.writeUTF("hej");
         return msgin;
     }
 
