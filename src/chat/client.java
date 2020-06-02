@@ -10,7 +10,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class client {
-    static ServerSocket ss;
     static Socket s;
     static DataInputStream dis;
     static DataOutputStream dout;
@@ -25,8 +24,8 @@ public class client {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    String msg = "";
-                    msg = msg_text.getText();
+                    String msg="";
+                    msg=msg_text.getText();
                     dout.writeUTF(msg);
                     msg_text.setText("");
                 }catch (Exception e)
@@ -35,16 +34,15 @@ public class client {
                 }
             }
         });
-        InputLoop();
     }
 
     private void InputLoop() {
         try{
 
             String msgin="SetUpNetwork";
-            while(msgin.equals("exit")){
+            while(!msgin.equals("exit")){
                 msgin = dis.readUTF();
-                msg_area.setText(msg_area.getText()+"\n server");
+                msg_area.setText(msg_area.getText() + "\n Client : " + msgin);
             }
 
         }catch(Exception e)
@@ -54,20 +52,28 @@ public class client {
     }
 
     private String SetUpNetwork() throws IOException {
-        String msgin="";
-        ss=new ServerSocket(1201);
-        s=ss.accept();
+        String msgin = "";
+        s = new Socket("127.0.0.1",1201);
         dis =new DataInputStream(s.getInputStream());
         dout = new DataOutputStream(s.getOutputStream());
+        dout.writeUTF("hej");
         return msgin;
     }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("client");
-        frame.setContentPane(new client().client);
+        client s = new client();
+        frame.setContentPane(s.client);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        try {
+            s.SetUpNetwork();
+            s.InputLoop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

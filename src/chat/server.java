@@ -26,8 +26,8 @@ public class server {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    String msg = "";
-                    msg = msg_text.getText();
+                    String msg="";
+                    msg=msg_text.getText();
                     dout.writeUTF(msg);
                     msg_text.setText("");
                 }catch (Exception e)
@@ -36,16 +36,14 @@ public class server {
                 }
             }
         });
-
-        InputLoop();
     }
 
     private void InputLoop() {
         try{
             String msgin = "SetUpNetwork";
-            while(msgin.equals("exit")){
+            while(!msgin.equals("exit")){
                 msgin = dis.readUTF();
-                msg_area.setText(msg_area.getText()+"\n client");
+                msg_area.setText(msg_area.getText() + " \n Server : " + msgin);
             }
 
         }catch(Exception e)
@@ -65,10 +63,17 @@ public class server {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("server");
-        frame.setContentPane(new server().server);
+        server s = new server();
+        frame.setContentPane(s.server);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        try {
+            s.InputLoop();
+            s.SetUpNetwork();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
